@@ -2,7 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import User from "./model/user.js"
 const app = express()
-
+import {loginRouter} from "./router/loginRouter.js"
 mongoose
   .connect("mongodb://localhost:27017/myapp")
   .then((data) => console.log("connected to db"))
@@ -23,13 +23,10 @@ app.post("/sign-up", async (req, res) => {
   const {name, email, password} = req.body
   const newUser = new User({name, email, password})
   await newUser.save()
-  console.log(newUser)
   res.redirect("login")
 })
 
-app.get("/login", (req, res) => {
-  res.render("login")
-})
+app.use("/login", loginRouter)
 
 app.post("/login", async (req, res) => {
   const {email, password} = req.body
@@ -37,7 +34,6 @@ app.post("/login", async (req, res) => {
   if (!user || user.password !== password) {
     return res.status(401).redirect("/login")
   }
-  console.log("User logged in:", user)
   if (user.email === "admin@sgvu.com" && user.password === password) {
     const allUsers = await User.find()
     return res.render("admin", {users: allUsers})
@@ -59,7 +55,6 @@ app.post("/submit-create", async (req, res) => {
   const {name, email, password} = req.body
   const newUser = new User({name, email, password})
   await newUser.save()
-  console.log(newUser)
   await User.findByIdAndDelete(req.body.userId)
   const allUsers = await User.find()
   return res.render("admin", {users: allUsers})
