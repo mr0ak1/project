@@ -30,3 +30,17 @@ app.post("/sign-up", async (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login")
 })
+
+app.post("/login", async (req, res) => {
+  const {email, password} = req.body
+  const user = await User.findOne({email})
+  if (!user || user.password !== password) {
+    return res.status(401).redirect("/login")
+  }
+  console.log("User logged in:", user)
+  if (user.email === "admin@sgvu.com" && user.password === password) {
+    const allUsers = await User.find()
+    return res.render("admin", {users: allUsers})
+  }
+  res.render("success", {username: user.name})
+})
