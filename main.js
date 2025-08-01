@@ -50,3 +50,7 @@ app.post("/delete-user", async (req, res) => {
   const allUsers = await User.find()
   return res.render("admin", {users: allUsers})
 })
+
+app.get("/create", (req, res) => {
+  res.render("create")
+})
