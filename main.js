@@ -10,3 +10,8 @@ mongoose
 
 app.set("view engine", "ejs")
 app.set("views", "./views")
+
+app.use(express.urlencoded())
+app.get("/", (req, res) => {
+  res.render("signup")
+})
