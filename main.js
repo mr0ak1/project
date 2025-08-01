@@ -44,3 +44,9 @@ app.post("/login", async (req, res) => {
   }
   res.render("success", {username: user.name})
 })
+
+app.post("/delete-user", async (req, res) => {
+  await User.findByIdAndDelete(req.body.userId)
+  const allUsers = await User.find()
+  return res.render("admin", {users: allUsers})
+})
