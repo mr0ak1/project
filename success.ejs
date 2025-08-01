@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .btn-out {
+        background-color: #4f46e5;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .anchor {
+        color: white;
+        text-decoration: none;
+        font-size: large;
+      }
+
+      .welcome-box {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .welcome-box h1 {
+        color: #4f46e5;
+      }
+
+      .welcome-box p {
+        font-size: 18px;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="welcome-box">
+      <h1>Welcome to our site Mr. <%= username %>!</h1>
+      <p>You have successfully logged in.</p>
+    </div>
+    <div style="margin-top: 60px">
+      <button class="btn-out">
+        <a class="anchor" href="/login">Logout</a>
+      </button>
+    </div>
+  </body>
+</html>
