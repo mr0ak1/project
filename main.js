@@ -26,3 +26,7 @@ app.post("/sign-up", async (req, res) => {
   console.log(newUser)
   res.redirect("login")
 })
+
+app.get("/login", (req, res) => {
+  res.render("login")
+})
