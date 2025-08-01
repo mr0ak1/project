@@ -54,3 +54,17 @@ app.post("/delete-user", async (req, res) => {
 app.get("/create", (req, res) => {
   res.render("create")
 })
+
+app.post("/submit-create", async (req, res) => {
+  const {name, email, password} = req.body
+  const newUser = new User({name, email, password})
+  await newUser.save()
+  console.log(newUser)
+  await User.findByIdAndDelete(req.body.userId)
+  const allUsers = await User.find()
+  return res.render("admin", {users: allUsers})
+})
+
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000")
+})
