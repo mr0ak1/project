@@ -7,3 +7,6 @@ mongoose
   .connect("mongodb://localhost:27017/myapp")
   .then((data) => console.log("connected to db"))
   .catch((err) => console.log(err))
+
+app.set("view engine", "ejs")
+app.set("views", "./views")
